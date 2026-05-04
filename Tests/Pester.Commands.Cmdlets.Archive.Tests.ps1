@@ -33,6 +33,7 @@ Describe "Test suite for Microsoft.PowerShell.Archive module" -Tags "BVT" {
         "Some Text" > $TestDrive$($DS)Sample.unzip
         "Some Text" > $TestDrive$($DS)Sample.cab
 
+        Write-Verbose -Verbose "TestSourceRoot is $script:TestSourceRoot"
         $preCreatedArchivePath = Join-Path $script:TestSourceRoot "SamplePreCreatedArchive.archive"
         Copy-Item $preCreatedArchivePath $TestDrive$($DS)SamplePreCreatedArchive.zip -Force
 
