@@ -3,7 +3,7 @@
  # Commands.Cmdlets.ArchiveTests suite contains Tests that are
  # used for validating Microsoft.PowerShell.Archive module.
  ############################################################################################>
-$script:TestSourceRoot = $PSScriptRoot
+# $script:TestSourceRoot = $PSScriptRoot
 $DS = [System.IO.Path]::DirectorySeparatorChar
 if ($IsWindows -eq $null) {
     $IsWindows = $PSVersionTable.PSEdition -eq "Desktop"
@@ -14,8 +14,9 @@ Describe "Test suite for Microsoft.PowerShell.Archive module" -Tags "BVT" {
         $originalProgressPref = $ProgressPreference
         $ProgressPreference = "SilentlyContinue"
         $originalPSModulePath = $env:PSModulePath
+        $testSourceRoot = $PSScriptRoot
         # make sure we use the one in this repo
-        $env:PSModulePath = "$($script:TestSourceRoot)\..;$($env:PSModulePath)"
+        $env:PSModulePath = "$($testSourceRoot)\..;$($env:PSModulePath)"
 
         New-Item $TestDrive$($DS)SourceDir -Type Directory | Out-Null
         New-Item $TestDrive$($DS)SourceDir$($DS)ChildDir-1 -Type Directory | Out-Null
@@ -33,11 +34,11 @@ Describe "Test suite for Microsoft.PowerShell.Archive module" -Tags "BVT" {
         "Some Text" > $TestDrive$($DS)Sample.unzip
         "Some Text" > $TestDrive$($DS)Sample.cab
 
-        Write-Verbose -Verbose "TestSourceRoot is $script:TestSourceRoot and PSScriptRoot is $PSScriptRoot"
-        $preCreatedArchivePath = Join-Path $script:TestSourceRoot "SamplePreCreatedArchive.archive"
+        Write-Verbose -Verbose "TestSourceRoot is $testSourceRoot and PSScriptRoot is $PSScriptRoot"
+        $preCreatedArchivePath = Join-Path $testSourceRoot "SamplePreCreatedArchive.archive"
         Copy-Item $preCreatedArchivePath $TestDrive$($DS)SamplePreCreatedArchive.zip -Force
 
-        $preCreatedArchivePath = Join-Path $script:TestSourceRoot "TrailingSpacer.archive"
+        $preCreatedArchivePath = Join-Path $testSourceRoot "TrailingSpacer.archive"
         Copy-Item $preCreatedArchivePath $TestDrive$($DS)TrailingSpacer.zip -Force
     }
 
