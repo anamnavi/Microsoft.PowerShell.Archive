@@ -26,15 +26,17 @@ jobs:
     - name: Install Pester
       shell: pwsh
       run: |
-        if (!(Get-Module -ListAvailable -Name Pester | Where-Object {$_.Version -le "4.99"})) {
+        if (!(Get-Module -ListAvailable -Name Pester | Where-Object $_.Version -le "4.99" -and $_.Version -ge "4.0"})) {
             Install-Module -Name Pester -Force -SkipPublisherCheck -MaximumVersion 4.99
         }
 
-        Get-Module -ListAvailable -Name Pester
+        Import-Module "Pester" -MaximumVersion "4.99"
     
     - name: Run Tests
       shell: pwsh
       run: |
+        Write-Verbose -Verbose "checking loaded Pester module"
+        Get-Module "Pester"
         $testResultsFile = "./ArchiveTestResults.xml"
         Import-Module "./Microsoft.PowerShell.Archive/Microsoft.PowerShell.Archive.psd1" -Force
         $testResults = Invoke-Pester -Script "./Tests" -OutputFormat NUnitXml -OutputFile $testResultsFile -PassThru
