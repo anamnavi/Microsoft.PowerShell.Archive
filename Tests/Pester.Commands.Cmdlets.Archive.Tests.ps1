@@ -8,10 +8,9 @@ $modPath = "$psscriptroot/Pester.Commands.Cmdlets.Archive.Tests.psm1"
 Import-Module $modPath -Force -Verbose
 
 $DS = [System.IO.Path]::DirectorySeparatorChar
-$script:IsWindows = $IsWindows
-if ($IsWindows -eq $null) {
-    $script:IsWindows = ($PSVersionTable.PSEdition -eq "Desktop")
-}
+# if ($IsWindows -eq $null) {
+#     $script:IsWindows = ($PSVersionTable.PSEdition -eq "Desktop")
+# }
 Describe "Test suite for Microsoft.PowerShell.Archive module" -Tags "BVT" {
 
     BeforeAll {
