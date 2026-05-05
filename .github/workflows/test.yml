@@ -29,6 +29,8 @@ jobs:
         if (!(Get-Module -ListAvailable -Name Pester | Where-Object {$_.Version -le "4.99"})) {
             Install-Module -Name Pester -Force -SkipPublisherCheck -MaximumVersion 4.99
         }
+
+        Get-Module -ListAvailable -Name Pester
     
     - name: Run Tests
       shell: pwsh
