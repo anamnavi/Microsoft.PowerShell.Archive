@@ -35,7 +35,6 @@ jobs:
     - name: Run Tests
       shell: pwsh
       run: |
-        Write-Verbose -Verbose "checking loaded Pester module"
         Get-Module "Pester"
         $testResultsFile = "./ArchiveTestResults.xml"
         Import-Module "./Microsoft.PowerShell.Archive/Microsoft.PowerShell.Archive.psd1" -Force
